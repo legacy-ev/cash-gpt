@@ -1,384 +1,222 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TrustAgent</title>
-    <style>
-      :root {
-        --bg: #f8fafc;
-        --card: #ffffff;
-        --border: #e2e8f0;
-        --text: #0f172a;
-        --muted: #475569;
-        --dark: #0f172a;
-        --ok-bg: #dcfce7;
-        --ok-text: #166534;
-        --warn-bg: #fef3c7;
-        --warn-text: #92400e;
-        --err-bg: #fee2e2;
-        --err-text: #991b1b;
-      }
-      * { box-sizing: border-box; }
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 24px;
-        display: grid;
-        gap: 16px;
-      }
-      .hero, .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 1px 3px rgba(0,0,0,.04);
-      }
-      .hero-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-      .hero p {
-        margin-top: 8px;
-        color: var(--muted);
-        max-width: 760px;
-      }
-      .actions {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .grid {
-        display: grid;
-        gap: 16px;
-      }
-      .grid-4 {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      }
-      .grid-2 {
-        grid-template-columns: 2fr 1fr;
-      }
-      .grid-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .metric {
-        background: #f8fafc;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px;
-      }
-      .metric div {
-        color: var(--muted);
-        font-size: 14px;
-      }
-      .metric h2 {
-        margin: 8px 0 0;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      th, td {
-        text-align: left;
-        padding: 10px;
-        border-bottom: 1px solid var(--border);
-        font-size: 14px;
-        vertical-align: top;
-      }
-      th {
-        color: var(--muted);
-        font-weight: 600;
-      }
-      button {
-        background: var(--dark);
-        color: white;
-        border: 0;
-        border-radius: 10px;
-        padding: 10px 14px;
-        cursor: pointer;
-      }
-      button.secondary {
-        background: white;
-        color: var(--dark);
-        border: 1px solid var(--border);
-      }
-      code, pre {
-        background: var(--dark);
-        color: #fff;
-        border-radius: 12px;
-        padding: 14px;
-        display: block;
-        overflow-x: auto;
-        font-size: 13px;
-      }
-      .badge {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 999px;
-        font-size: 12px;
-        white-space: nowrap;
-      }
-      .ok { background: var(--ok-bg); color: var(--ok-text); }
-      .warn { background: var(--warn-bg); color: var(--warn-text); }
-      .err { background: var(--err-bg); color: var(--err-text); }
-      .muted {
-        color: var(--muted);
-        font-size: 14px;
-      }
-      .list {
-        display: grid;
-        gap: 12px;
-      }
-      .item {
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 14px;
-        background: #fff;
-      }
-      .item h4 {
-        margin: 0 0 6px;
-        font-size: 15px;
-      }
-      .row {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .timeline {
-        display: grid;
-        gap: 12px;
-      }
-      .timeline-item {
-        border-left: 3px solid var(--border);
-        padding-left: 12px;
-      }
-      .timeline-item strong {
-        display: block;
-        margin-bottom: 4px;
-      }
-      .empty {
-        color: var(--muted);
-        font-size: 14px;
-        padding: 12px 0;
-      }
-      .footer-note {
-        font-size: 13px;
-        color: var(--muted);
-      }
-      @media (max-width: 980px) {
-        .grid-2, .grid-3 {
-          grid-template-columns: 1fr;
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CashGPT - Get Paid to Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258df4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
         }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <div class="hero">
-        <div class="hero-row">
-          <div>
-            <h1 style="margin:0;">TrustAgent</h1>
-            <p>
-              Intent, policy checks, approvals, exceptions, and audit trail for AI agent commerce.
-              This is the control layer that makes AI agent actions reviewable and enterprise-safe.
-            </p>
-          </div>
-          <div class="actions">
-            <button class="secondary" onclick="loadData()">Refresh dashboard</button>
-            <button onclick="seedDemo()">Refresh demo data</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-4">
-        <div class="metric"><div>Health</div><h2 id="health">Checking...</h2></div>
-        <div class="metric"><div>Intents</div><h2 id="intentCount">0</h2></div>
-        <div class="metric"><div>Policies</div><h2 id="policyCount">0</h2></div>
-        <div class="metric"><div>Pending approvals</div><h2 id="approvalCount">0</h2></div>
-      </div>
-
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="row">
-            <div>
-              <h3 style="margin:0 0 4px;">Recent intents</h3>
-              <div class="muted">Live records from the TrustAgent database</div>
-            </div>
-          </div>
-          <div style="overflow:auto; margin-top:14px;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Agent</th>
-                  <th>Max amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="intentsBody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0;">API example</h3>
-          <pre>POST /api/intents
-{
-  "title": "Renew CRM subscription",
-  "instruction_text": "Renew under £18,000",
-  "agent_name": "Renewal Agent",
-  "max_amount": 1800000,
-  "currency": "GBP"
-}</pre>
-          <div class="footer-note" style="margin-top:12px;">
-            This prototype is currently driven by live API routes and demo data.
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-3">
-        <div class="card">
-          <h3 style="margin-top:0;">Policies</h3>
-          <div id="policiesList" class="list"></div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0;">Approvals</h3>
-          <div id="approvalsList" class="list"></div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0;">Exceptions</h3>
-          <div id="exceptionsList" class="list"></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3 style="margin-top:0;">Audit trail</h3>
-        <div class="muted" style="margin-bottom:12px;">Latest events for the demo intent</div>
-        <div id="auditList" class="timeline"></div>
-      </div>
-    </div>
-
-    <script>
-      function money(amount, currency = 'GBP') {
-        if (amount == null) return '-';
-        return (amount / 100).toLocaleString('en-GB', {
-          style: 'currency',
-          currency
-        });
-      }
-
-      function badgeClass(status) {
-        const s = String(status || '').toLowerCase();
-        if (['active', 'approved', 'completed', 'open_ok', 'ok'].includes(s)) return 'ok';
-        if (['pending', 'review', 'awaiting approval'].includes(s)) return 'warn';
-        if (['error', 'failed', 'rejected'].includes(s)) return 'err';
-        if (['open', 'exception'].includes(s)) return 'warn';
-        return 'warn';
-      }
-
-      function renderEmpty(text) {
-        return '<div class="empty">' + text + '</div>';
-      }
-
-      async function loadJson(url) {
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error(url + ' failed with ' + res.status);
-        }
-        return res.json();
-      }
-
-      async function loadData() {
-        try {
-          const [health, intents, policies, approvals, exceptions, audit] = await Promise.all([
-            loadJson('/health'),
-            loadJson('/api/intents'),
-            loadJson('/api/policies'),
-            loadJson('/api/approvals'),
-            loadJson('/api/exceptions'),
-            loadJson('/api/audit/int_demo_1')
-          ]);
-
-          document.getElementById('health').textContent = health.ok ? 'OK' : 'Error';
-          document.getElementById('intentCount').textContent = intents.length;
-          document.getElementById('policyCount').textContent = policies.length;
-          document.getElementById('approvalCount').textContent =
-            approvals.filter(a => String(a.status).toLowerCase() === 'pending').length;
-
-          document.getElementById('intentsBody').innerHTML = intents.length ? intents.map(i => `
-            <tr>
-              <td>${i.title || ''}</td>
-              <td>${i.agent_name || i.agent_id || '-'}</td>
-              <td>${money(Number(i.max_amount || 0), i.currency || 'GBP')}</td>
-              <td><span class="badge ${badgeClass(i.status)}">${i.status || '-'}</span></td>
-            </tr>
-          `).join('') : `<tr><td colspan="4" class="empty">No intents yet</td></tr>`;
-
-          document.getElementById('policiesList').innerHTML = policies.length ? policies.map(p => `
-            <div class="item">
-              <h4>${p.name || '-'}</h4>
-              <div class="muted">${p.description || 'No description'}</div>
-              <div class="row" style="margin-top:10px;">
-                <span class="badge ${badgeClass(p.status)}">${p.status || 'active'}</span>
-                <span class="muted">Threshold: ${p.approval_threshold ? money(Number(p.approval_threshold), 'GBP') : '-'}</span>
-              </div>
-            </div>
-          `).join('') : renderEmpty('No policies yet');
-
-          document.getElementById('approvalsList').innerHTML = approvals.length ? approvals.map(a => `
-            <div class="item">
-              <h4>${a.reason || 'Approval request'}</h4>
-              <div class="muted">Reviewer: ${a.reviewer_name || a.reviewer_user_id || '-'}</div>
-              <div style="margin-top:10px;">
-                <span class="badge ${badgeClass(a.status)}">${a.status || 'pending'}</span>
-              </div>
-            </div>
-          `).join('') : renderEmpty('No approvals yet');
-
-          document.getElementById('exceptionsList').innerHTML = exceptions.length ? exceptions.map(e => `
-            <div class="item">
-              <h4>${e.type || 'Exception'}</h4>
-              <div class="muted">${e.summary || ''}</div>
-              <div class="row" style="margin-top:10px;">
-                <span class="badge ${badgeClass(e.status)}">${e.status || 'open'}</span>
-                <span class="muted">Severity: ${e.severity || '-'}</span>
-              </div>
-            </div>
-          `).join('') : renderEmpty('No exceptions yet');
-
-          document.getElementById('auditList').innerHTML = audit.length ? audit.map(ev => `
-            <div class="timeline-item">
-              <strong>${ev.event_type}</strong>
-              <div class="muted">${new Date(ev.created_at).toLocaleString()}</div>
-              <div style="margin-top:6px;"><code>${JSON.stringify(ev.payload)}</code></div>
-            </div>
-          `).join('') : renderEmpty('No audit events yet');
-
-        } catch (e) {
-          document.getElementById('health').textContent = 'Error';
-          console.error(e);
-          alert('Dashboard load failed: ' + e.message);
-        }
-      }
-
-      async function seedDemo() {
-        await loadData();
-        alert('Demo data refreshed from the live API.');
-      }
-
-      loadData();
     </script>
-  </body>
-</html>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 py-4 lg:px-40 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">CashGPT</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#features">Features</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#how-it-works">How it Works</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Reviews</a>
+</div>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-5 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="truncate">Install Extension</span>
+</button>
+</div>
+<button class="md:hidden text-slate-900 dark:text-slate-100">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="flex flex-col flex-1">
+<!-- Hero Section -->
+<div class="px-6 lg:px-40 py-12 lg:py-20">
+<div class="flex flex-col gap-10 lg:flex-row lg:items-center">
+<div class="flex flex-col gap-8 flex-1 lg:max-w-[500px]">
+<div class="flex flex-col gap-4">
+<span class="bg-primary/10 text-primary px-4 py-1 rounded-full text-xs font-bold w-fit uppercase tracking-widest">Available on Chrome</span>
+<h1 class="text-slate-900 dark:text-slate-100 text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
+                                Get Paid to Chat with <span class="text-primary">CashGPT</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg lg:text-xl font-normal leading-relaxed">
+                                The smartest AI assistant that turns your ChatGPT conversations into real cashback rewards automatically.
+                            </p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-8 bg-primary text-white text-lg font-bold shadow-xl shadow-primary/30 hover:bg-primary/90 transition-all">
+<span class="truncate">Get the Extension</span>
+</button>
+<div class="flex items-center gap-3 px-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-400"></div>
+</div>
+<span class="text-sm font-medium text-slate-500">Joined by 10k+ shoppers</span>
+</div>
+</div>
+</div>
+<div class="flex-1 relative">
+<div class="aspect-square w-full max-w-[500px] mx-auto bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+<!-- Placeholder for 3D Illustration -->
+<div class="w-full h-full bg-cover bg-center rounded-2xl" data-alt="Playful 3D illustration of a robot holding cash and coins" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDF8P8PdJKC8qjOcxPt2jsUeqaiH_GnodsAvRargfKDPoNgZrEzy7sZ2DPEr0XL5KwRiIEQ2isV5Y6oAgAe2Z2-8iFrLygCrr8o9nd1d9p901r3fb0U51iSFLQvi28Y4Y8YdNZK0ightTc6dehXgxvTdwrNxNMuiLKLo83eeO2r1Xeg8s4jmkr_F-MmErKj7yk7FJ0VD0gU5dEQxYZ_sddGnRRPaStrg2aWPl0w7_iZ0LtuA0QpyVBqll5tigUA46FYTPYzyLhfoQf7');">
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Features Section -->
+<div class="px-6 lg:px-40 py-16 bg-white dark:bg-background-dark/50" id="features">
+<div class="flex flex-col gap-4 mb-12 text-center items-center">
+<h2 class="text-slate-900 dark:text-slate-100 text-3xl lg:text-4xl font-bold tracking-tight max-w-[600px]">
+                        Supercharge Your Savings with AI
+                    </h2>
+<p class="text-slate-600 dark:text-slate-400 text-base max-w-[500px]">
+                        Our extension works quietly in the background to find you the best deals while you talk to AI.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-6 rounded-2xl border border-primary/10 bg-white dark:bg-slate-900 p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all border-b-4 border-b-primary">
+<div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold">ChatGPT Integration</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Works seamlessly within your ChatGPT interface. No new tabs, no extra clicks, just pure magic.
+                            </p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-6 rounded-2xl border border-primary/10 bg-white dark:bg-slate-900 p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all border-b-4 border-b-green-500">
+<div class="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">link</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold">Automatic Links</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Instantly transforms product mentions into special cashback links that pay you when you shop.
+                            </p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col gap-6 rounded-2xl border border-primary/10 bg-white dark:bg-slate-900 p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all border-b-4 border-b-amber-500">
+<div class="w-14 h-14 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-slate-100 text-xl font-bold">Earn Real Cash</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Withdraw your earnings directly to your bank or PayPal. Real money, no complicated points systems.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- How It Works Section -->
+<div class="px-6 lg:px-40 py-20 bg-background-light dark:bg-background-dark" id="how-it-works">
+<div class="flex flex-col items-center gap-16">
+<div class="text-center flex flex-col gap-4">
+<h2 class="text-slate-900 dark:text-slate-100 text-3xl lg:text-4xl font-bold">How It Works</h2>
+<div class="h-1.5 w-20 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative w-full">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center gap-6 relative z-10">
+<div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-3xl font-bold shadow-xl shadow-primary/20">
+                                1
+                            </div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-bold">Talk to ChatGPT</h3>
+<p class="text-slate-600 dark:text-slate-400">Ask for recommendations or chat normally about products you're looking for.</p>
+</div>
+<div class="hidden lg:block absolute top-10 left-[60%] w-full h-[2px] border-t-2 border-dashed border-primary/30 -z-10"></div>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center gap-6 relative z-10">
+<div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-3xl font-bold shadow-xl shadow-primary/20">
+                                2
+                            </div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-bold">Extension Highlights</h3>
+<p class="text-slate-600 dark:text-slate-400">CashGPT automatically finds and highlights the best cashback deals for mentioned items.</p>
+</div>
+<div class="hidden lg:block absolute top-10 left-[60%] w-full h-[2px] border-t-2 border-dashed border-primary/30 -z-10"></div>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center gap-6 relative z-10">
+<div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center text-3xl font-bold shadow-xl shadow-primary/20">
+                                3
+                            </div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-bold">Buy and Get Paid</h3>
+<p class="text-slate-600 dark:text-slate-400">Click the highlighted link, complete your purchase, and watch your balance grow!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="px-6 lg:px-40 py-20">
+<div class="bg-primary rounded-3xl p-8 lg:p-16 text-center flex flex-col items-center gap-8 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full -ml-32 -mb-32"></div>
+<h2 class="text-white text-3xl lg:text-5xl font-bold relative z-10">Start earning today while you chat</h2>
+<p class="text-white/80 text-lg lg:text-xl max-w-[600px] relative z-10">
+                        Join thousands of smart shoppers using AI to save money on every purchase.
+                    </p>
+<button class="flex min-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-16 px-10 bg-white text-primary text-xl font-bold shadow-2xl hover:scale-105 transition-all relative z-10">
+<span class="truncate">Add to Chrome — It's Free</span>
+</button>
+<p class="text-white/60 text-sm relative z-10">No credit card required. Private &amp; Secure.</p>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="px-6 lg:px-40 py-12 border-t border-primary/10">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold">CashGPT</h2>
+</div>
+<div class="flex gap-8">
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
+<a class="text-slate-500 hover:text-primary text-sm transition-colors" href="#">Contact Support</a>
+</div>
+<div class="text-slate-400 text-sm">
+                    © 2024 CashGPT. All rights reserved.
+                </div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
